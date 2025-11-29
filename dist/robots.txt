@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salvatorecoticella47-web.github.io/440recordinglabs/sitemap.xml

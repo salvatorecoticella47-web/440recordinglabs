@@ -32,4 +32,49 @@
   .delay-500 {
     transition-delay: 500ms;
   }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .logo-scroll {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .logo-scroll::before,
+  .logo-scroll::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .logo-scroll::before {
+    left: 0;
+    background: linear-gradient(to right, rgb(39, 39, 42), transparent);
+  }
+
+  .logo-scroll::after {
+    right: 0;
+    background: linear-gradient(to left, rgb(39, 39, 42), transparent);
+  }
+
+  .logo-scroll-content {
+    display: flex;
+    animation: scroll 30s linear infinite;
+    width: fit-content;
+  }
+
+  .logo-scroll:hover .logo-scroll-content {
+    animation-play-state: paused;
+  }
 }

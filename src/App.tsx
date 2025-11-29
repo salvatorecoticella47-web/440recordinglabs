@@ -79,8 +79,76 @@ function App() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-zinc-800">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-zinc-800 overflow-hidden">
         <div className="max-w-7xl mx-auto">
+          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-4 sm:mb-8 px-2">
+            Usano i Migliori <span className="text-amber-500">Plugin Professionali</span>
+          </h2>
+          <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-100 text-base sm:text-lg text-zinc-300 text-center mb-8 sm:mb-12 px-2">
+            Le stesse case di plugin usate dai più grandi studi di registrazione al mondo
+          </p>
+
+          <div className="relative mb-12 sm:mb-20">
+            <div className="logo-scroll">
+              <div className="logo-scroll-content">
+                <div className="flex items-center space-x-12 sm:space-x-16">
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Plugin Alliance</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Arturia</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">iZotope</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Reaper</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Waves Audio</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-12 sm:space-x-16">
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Plugin Alliance</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Arturia</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">iZotope</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Reaper</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
+                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
+                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Waves Audio</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-8 sm:mb-16 px-2">
             Perché scegliere <span className="text-amber-500">440RecordingLab</span> per il tuo Mix & Mastering?
           </h2>
