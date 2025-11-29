@@ -81,96 +81,28 @@ function App() {
 
       <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-zinc-800 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-4 sm:mb-8 px-2">
-            Usano i Migliori <span className="text-amber-500">Plugin Professionali</span>
-          </h2>
-          <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-100 text-base sm:text-lg text-zinc-300 text-center mb-8 sm:mb-12 px-2">
-            Le stesse case di plugin usate dai più grandi studi di registrazione al mondo
-          </p>
-
-          <div className="relative mb-12 sm:mb-20">
-            <div className="logo-scroll">
-              <div className="logo-scroll-content">
-                <div className="flex items-center space-x-12 sm:space-x-16">
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Plugin Alliance</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Arturia</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">iZotope</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Reaper</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Waves Audio</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-12 sm:space-x-16">
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Plugin Alliance</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Arturia</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">iZotope</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Reaper</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-center min-w-[140px] sm:min-w-[180px]">
-                    <div className="p-4 sm:p-6 w-full flex items-center justify-center h-24 sm:h-28 bg-zinc-700/30 rounded-lg border border-zinc-600">
-                      <span className="text-zinc-300 font-bold text-sm sm:text-base text-center">Waves Audio</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-8 sm:mb-16 px-2">
-            Perché scegliere <span className="text-amber-500">440RecordingLab</span> per il tuo Mix & Mastering?
+            Perché scegliere <span className="text-amber-500">440RecordingLab</span><br />per il tuo Mix & Mastering?
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
             <div className="scroll-reveal opacity-0 -translate-x-8 transition-all duration-1000 ease-out bg-zinc-900 p-6 sm:p-8 rounded-xl border border-zinc-700">
               <div className="text-4xl sm:text-5xl font-bold text-amber-500 mb-3 sm:mb-4">68%</div>
-              <p className="text-sm sm:text-base text-zinc-300">
+              <p className="text-sm sm:text-base text-zinc-300 text-justify">
                 dei musicisti e produttori indipendenti tenta di fare mix e mastering da soli, ma solo il 10% ottiene risultati professionali.
               </p>
             </div>
 
             <div className="scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-200 bg-zinc-900 p-6 sm:p-8 rounded-xl border border-zinc-700">
               <div className="text-4xl sm:text-5xl font-bold text-amber-500 mb-3 sm:mb-4">100%</div>
-              <p className="text-sm sm:text-base text-zinc-300">
+              <p className="text-sm sm:text-base text-zinc-300 text-justify">
                 Un mix e mastering professionale può fare la differenza tra una traccia che suona piatta e una che cattura l'ascoltatore.
               </p>
             </div>
 
             <div className="scroll-reveal opacity-0 translate-x-8 transition-all duration-1000 ease-out delay-300 bg-zinc-900 p-6 sm:p-8 rounded-xl border border-zinc-700 sm:col-span-2 lg:col-span-1">
               <div className="text-4xl sm:text-5xl font-bold text-amber-500 mb-3 sm:mb-4">+45%</div>
-              <p className="text-sm sm:text-base text-zinc-300">
+              <p className="text-sm sm:text-base text-zinc-300 text-justify">
                 I brani che hanno ricevuto un mastering professionale sono il 45% più ascoltati sulle piattaforme di streaming.
               </p>
             </div>
@@ -227,7 +159,7 @@ function App() {
                   <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 fill-amber-500" />
                 ))}
               </div>
-              <p className="text-sm sm:text-base text-zinc-300 mb-3 sm:mb-4 italic">
+              <p className="text-sm sm:text-base text-zinc-300 mb-3 sm:mb-4 italic text-justify">
                 "Lavorare con Salvatore è stato un piacere. Il mio brano è diventato un altro livello! Suona potente e chiaro come non mai."
               </p>
               <p className="text-amber-500 font-semibold text-sm sm:text-base">– Marco Rossi, Musicista</p>
@@ -239,7 +171,7 @@ function App() {
                   <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 fill-amber-500" />
                 ))}
               </div>
-              <p className="text-sm sm:text-base text-zinc-300 mb-3 sm:mb-4 italic">
+              <p className="text-sm sm:text-base text-zinc-300 mb-3 sm:mb-4 italic text-justify">
                 "Ho fatto mix e mastering online con 440RecordingLab e il risultato è incredibile. La qualità è superiore a qualsiasi cosa avessi ottenuto da solo."
               </p>
               <p className="text-amber-500 font-semibold text-sm sm:text-base">– Francesca Bellini, Produttrice</p>
@@ -251,7 +183,7 @@ function App() {
                   <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 fill-amber-500" />
                 ))}
               </div>
-              <p className="text-sm sm:text-base text-zinc-300 mb-3 sm:mb-4 italic">
+              <p className="text-sm sm:text-base text-zinc-300 mb-3 sm:mb-4 italic text-justify">
                 "La mia traccia è diventata radiofonica grazie al lavoro di Salvatore. Il suo orecchio è insuperabile."
               </p>
               <p className="text-amber-500 font-semibold text-sm sm:text-base">– Davide Galli, Cantautore</p>
