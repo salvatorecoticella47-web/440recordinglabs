@@ -1,4 +1,4 @@
-import { Music, Phone, Mail, Clock, Star, Award, Headphones, Instagram, Youtube } from 'lucide-react';
+import { Music, Phone, Mail, Clock, Star, Instagram, Youtube } from 'lucide-react';
 import { useEffect, useRef, useMemo } from 'react';
 
 function App() {
@@ -6,13 +6,13 @@ function App() {
 
   // Palette di colori per ogni giorno della settimana
   const colorThemes = useMemo(() => [
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Lunedì
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Martedì
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Mercoledì
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Giovedì
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Venerdì
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Sabato
-    { primary: 'red', gradient: 'from-red-600 to-red-700', gradientHover: 'from-red-700 to-red-800' }, // Domenica
+    { hex: '#E30613', rgb: 'rgb(227, 6, 19)' }, // Lunedì - Rosso
+    { hex: '#FFED00', rgb: 'rgb(255, 237, 0)' }, // Martedì - Giallo
+    { hex: '#009640', rgb: 'rgb(0, 150, 64)' }, // Mercoledì - Verde
+    { hex: '#312783', rgb: 'rgb(49, 39, 131)' }, // Giovedì - Blu scuro
+    { hex: '#E6007E', rgb: 'rgb(230, 0, 126)' }, // Venerdì - Magenta
+    { hex: '#00CFFF', rgb: 'rgb(0, 207, 255)' }, // Sabato - Ciano
+    { hex: '#009FE3', rgb: 'rgb(0, 159, 227)' }, // Domenica - Blu
   ], []);
 
   // Calcola quale tema usare in base al giorno della settimana
@@ -24,27 +24,11 @@ function App() {
     return colorThemes[adjustedDay];
   }, [colorThemes]);
 
-  // Classi di colore complete per Tailwind
-  const colorClasses = useMemo(() => {
-    const primary = currentTheme.primary;
-    return {
-      // Background
-      'bg-600': `bg-${primary}-600`,
-      'bg-700': `bg-${primary}-700`,
-      'hover:bg-700': `hover:bg-${primary}-700`,
-      // Text
-      'text-600': `text-${primary}-600`,
-      'hover:text-600': `hover:text-${primary}-600`,
-      // Border
-      'border-600': `border-${primary}-600`,
-      // Fill
-      'fill-600': `fill-${primary}-600`,
-      // Ring
-      'ring-600': `focus:ring-${primary}-600`,
-    };
-  }, [currentTheme]);
-
-  const getColorClass = (key: keyof typeof colorClasses) => colorClasses[key];
+  const getHoverBgColorClass = () => {
+    const rgb = currentTheme.rgb.match(/\d+/g)?.map(Number) || [0, 0, 0];
+    const darkerRgb = rgb.map(v => Math.max(0, v - 30));
+    return `rgb(${darkerRgb.join(', ')})`;
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -77,14 +61,15 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <svg className="w-10 h-10 sm:w-12 sm:h-12" viewBox="0 0 280 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 60 Q25 20, 40 10 T70 60 Q85 100, 100 110 T130 60 Q145 20, 160 10 T190 60 Q205 100, 220 110 T250 60 L270 60" stroke="white" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-              </svg>
+              <img src="/Immagine_WhatsApp_2025-12-01_ore_22.30.48_4c171728-removebg-preview.png" alt="440RecordingLab Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain" />
               <span className="text-lg sm:text-2xl font-bold text-white">440RecordingLab</span>
             </div>
             <a
               href="#contatti"
-              className={`${getColorClass('bg-600')} ${getColorClass('hover:bg-700')} text-white px-4 py-2 sm:px-6 text-sm sm:text-base rounded-full font-semibold transition-all transform hover:scale-105`}
+              className="text-white px-4 py-2 sm:px-6 text-sm sm:text-base rounded-full font-semibold transition-all transform hover:scale-105"
+              style={{ backgroundColor: currentTheme.hex }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = getHoverBgColorClass()}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = currentTheme.hex}
             >
               Contattaci
             </a>
@@ -92,60 +77,65 @@ function App() {
         </div>
       </nav>
 
-      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 bg-neutral-900">
+      <section className="pt-24 sm:pt-32 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8 bg-neutral-900">
         <div className="max-w-7xl mx-auto text-center">
-          <h1 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-4 sm:mb-6 leading-tight px-2 text-white">
-            Porta la tua musica a un livello superiore con{' '}
-            <span className={getColorClass('text-600')}>440RecordingLab</span>
+          <h1 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-4 sm:mb-6 leading-tight px-2">
+            <span className="text-white">Porta la tua musica</span> <span style={{ color: currentTheme.hex }}>a un livello superiore</span> <span className="text-white">con</span>{' '}
+            <span style={{ color: currentTheme.hex }}>440RecordingLab</span>
           </h1>
           <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-100 text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 sm:mb-8 px-2">
             Mix e Mastering professionale, in presenza e online.
           </p>
-          <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-200 text-base sm:text-lg text-gray-400 mb-8 sm:mb-12 max-w-3xl mx-auto px-2">
+          <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-200 text-base sm:text-lg text-gray-400 mb-6 sm:mb-8 max-w-3xl mx-auto px-2">
             Qualità audio impeccabile, esperienza decennale nel settore, con un fonico che sa cosa fa.
           </p>
 
-          <div className="scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-300 bg-neutral-800 rounded-2xl p-6 sm:p-8 mb-8 sm:mb-12 max-w-4xl mx-auto border border-neutral-700 shadow-lg">
-            <div className="flex items-center justify-center mb-4 sm:mb-6">
-              <Headphones className={`w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 ${getColorClass('text-600')}`} />
-            </div>
-            <p className="text-gray-400 italic text-sm sm:text-base">
+          <div className="scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-300 bg-neutral-800 rounded-2xl overflow-hidden mb-6 sm:mb-8 max-w-4xl mx-auto border border-neutral-700 shadow-lg">
+            <img
+              src="https://images.pexels.com/photos/164938/pexels-photo-164938.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Studio di registrazione professionale con attrezzature di ultima generazione"
+              className="w-full h-64 sm:h-80 md:h-96 object-cover"
+            />
+            <p className="text-gray-400 italic text-sm sm:text-base p-4 sm:p-6 text-center">
               Studio di registrazione professionale con attrezzature di ultima generazione
             </p>
           </div>
 
           <a
             href="#contatti"
-            className={`scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-500 inline-block ${getColorClass('bg-600')} ${getColorClass('hover:bg-700')} text-white px-8 py-3 sm:px-10 sm:py-4 rounded-full text-lg sm:text-xl font-bold hover:scale-105 shadow-2xl`}
+            className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-500 inline-block text-white px-8 py-3 sm:px-10 sm:py-4 rounded-full text-lg sm:text-xl font-bold hover:scale-105 shadow-2xl"
+            style={{ backgroundColor: currentTheme.hex }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = getHoverBgColorClass()}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = currentTheme.hex}
           >
             Prenota la tua sessione ora!
           </a>
         </div>
       </section>
 
-      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900 overflow-hidden">
+      <section className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-neutral-900 overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-8 sm:mb-16 px-2 text-white">
-            Perché scegliere <span className={getColorClass('text')}>440RecordingLab</span><br />per il tuo Mix & Mastering?
+          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-6 sm:mb-10 px-2">
+            <span className="text-white">Perché scegliere</span> <span style={{ color: currentTheme.hex }}>440RecordingLab</span><br /><span className="text-white">per il tuo</span> <span style={{ color: currentTheme.hex }}>Mix & Mastering?</span>
           </h2>
 
           <div className="flex flex-col md:flex-row gap-6 sm:gap-8 mb-8 sm:mb-12">
             <div className="scroll-reveal opacity-0 -translate-x-8 transition-all duration-1000 ease-out bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md md:flex-1">
-              <div className={`text-4xl sm:text-5xl font-bold ${getColorClass('text-600')} mb-3 sm:mb-4 text-center`}>68%</div>
+              <div className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center" style={{ color: currentTheme.hex }}>68%</div>
               <p className="text-sm sm:text-base text-gray-300 text-justify">
                 dei musicisti e produttori indipendenti tenta di fare mix e mastering da soli, ma solo il 10% ottiene risultati professionali.
               </p>
             </div>
 
             <div className="scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-200 bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md md:flex-1">
-              <div className={`text-4xl sm:text-5xl font-bold ${getColorClass('text-600')} mb-3 sm:mb-4 text-center`}>100%</div>
+              <div className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center" style={{ color: currentTheme.hex }}>100%</div>
               <p className="text-sm sm:text-base text-gray-300 text-justify">
                 Un mix e mastering professionale può fare la differenza tra una traccia che suona piatta e una che cattura l'ascoltatore.
               </p>
             </div>
 
             <div className="scroll-reveal opacity-0 translate-x-8 transition-all duration-1000 ease-out delay-300 bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md md:flex-1">
-              <div className={`text-4xl sm:text-5xl font-bold ${getColorClass('text-600')} mb-3 sm:mb-4 text-center`}>+45%</div>
+              <div className="text-4xl sm:text-5xl font-bold mb-3 sm:mb-4 text-center" style={{ color: currentTheme.hex }}>+45%</div>
               <p className="text-sm sm:text-base text-gray-300 text-justify">
                 I brani che hanno ricevuto un mastering professionale sono il 45% più ascoltati sulle piattaforme di streaming.
               </p>
@@ -154,7 +144,7 @@ function App() {
 
           <div className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-400 bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md">
             <p className="text-base sm:text-lg text-gray-300 leading-relaxed text-justify">
-              Nonostante l'accesso a software e tutorial online, il mix e mastering fai-da-te non garantisce una qualità all'altezza delle tue aspettative. <span className={`${getColorClass('text-600')} font-semibold`}>440RecordingLab</span> offre un servizio completo che ti permette di ottenere il massimo dalla tua musica, sia con sessioni in presenza che online. Con un fonico di esperienza decennale nel settore, utilizziamo attrezzature professionali per garantirti il suono perfetto che farà spiccare la tua traccia.
+              Nonostante l'accesso a software e tutorial online, il mix e mastering fai-da-te non garantisce una qualità all'altezza delle tue aspettative. <span className="font-semibold" style={{ color: currentTheme.hex }}>440RecordingLab</span> offre un servizio completo che ti permette di ottenere il massimo dalla tua musica, sia con sessioni in presenza che online. Con un fonico di esperienza decennale nel settore, utilizziamo attrezzature professionali per garantirti il suono perfetto che farà spiccare la tua traccia.
             </p>
           </div>
         </div>
@@ -165,7 +155,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
               <h2 className="scroll-reveal opacity-0 -translate-x-12 transition-all duration-1000 ease-out text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-4 sm:mb-6">
-                <span className={getColorClass('text')}>Salvatore Coticella</span>
+                <span className="text-white">Salvatore</span> <span style={{ color: currentTheme.hex }}>Coticella</span>
               </h2>
               <h3 className="scroll-reveal opacity-0 -translate-x-12 transition-all duration-1000 ease-out delay-100 text-lg sm:text-xl md:text-2xl text-gray-400 mb-4 sm:mb-6">Fonico con 10 Anni di Esperienza</h3>
 
@@ -173,17 +163,21 @@ function App() {
                 Salvatore Coticella è il cuore pulsante di 440RecordingLab. Con oltre 10 anni di esperienza nel settore musicale, ha collaborato con artisti e band di vari generi, creando mix e mastering che fanno la differenza. La sua passione per il suono e la cura per ogni dettaglio lo hanno reso una figura di riferimento per chi cerca un audio di qualità superiore.
               </p>
 
-              <div className={`scroll-reveal opacity-0 -translate-x-12 transition-all duration-1000 ease-out delay-300 bg-neutral-800 border-l-4 ${getColorClass('border-600')} p-4 sm:p-6 rounded-r-xl shadow-md`}>
+              <div className="scroll-reveal opacity-0 -translate-x-12 transition-all duration-1000 ease-out delay-300 bg-neutral-800 border-l-4 p-4 sm:p-6 rounded-r-xl shadow-md" style={{ borderColor: currentTheme.hex }}>
                 <p className="text-base sm:text-xl italic text-gray-400 mb-3 sm:mb-4">
                   "Ogni progetto è unico. Il mio obiettivo è far emergere il meglio di ogni traccia, garantendo una qualità sonora che parli da sé."
                 </p>
-                <p className={`${getColorClass('text-600')} font-semibold text-sm sm:text-base`}>– Salvatore Coticella, Fonico</p>
+                <p className="font-semibold text-sm sm:text-base" style={{ color: currentTheme.hex }}>– Salvatore Coticella, Fonico</p>
               </div>
             </div>
 
             <div className="order-1 md:order-2 flex justify-center">
-              <div className="scroll-reveal opacity-0 translate-x-12 rotate-3 transition-all duration-1000 ease-out bg-neutral-800 p-6 sm:p-8 rounded-2xl border border-neutral-700 shadow-lg">
-                <Award className={`w-full h-48 sm:h-56 md:h-64 ${getColorClass('text-600')}`} />
+              <div className="scroll-reveal opacity-0 translate-x-12 rotate-3 transition-all duration-1000 ease-out">
+                <img
+                  src="/Immagine WhatsApp 2025-12-01 ore 22.02.42_60fb7b33.jpg"
+                  alt="Salvatore Coticella - Fonico Professionista"
+                  className="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 object-cover rounded-2xl border-4 border-neutral-700 shadow-2xl"
+                />
               </div>
             </div>
           </div>
@@ -192,8 +186,8 @@ function App() {
 
       <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900">
         <div className="max-w-7xl mx-auto">
-          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-4 sm:mb-6 px-2 text-white">
-            Ascolta i Nostri <span className={getColorClass('text')}>Lavori</span>
+          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-4 sm:mb-6 px-2">
+            <span className="text-white">Ascolta i Nostri</span> <span style={{ color: currentTheme.hex }}>Lavori</span>
           </h2>
           <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-100 text-base sm:text-lg text-gray-300 text-center mb-8 sm:mb-16 max-w-3xl mx-auto px-2">
             Scopri la qualità del nostro mix e mastering attraverso i progetti che abbiamo realizzato
@@ -215,45 +209,45 @@ function App() {
 
       <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900">
         <div className="max-w-7xl mx-auto">
-          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-8 sm:mb-16 px-2 text-white">
-            Cosa Dicono i Nostri <span className={getColorClass('text')}>Clienti</span>
+          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-6 sm:mb-10 px-2">
+            <span className="text-white">Cosa Dicono i Nostri</span> <span style={{ color: currentTheme.hex }}>Clienti</span>
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
             <div className="scroll-reveal opacity-0 translate-y-12 transition-all duration-1000 ease-out bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md">
               <div className="flex mb-3 sm:mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-4 h-4 sm:w-5 sm:h-5 ${getColorClass('text-600')} ${getColorClass('fill-600')}`} />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: currentTheme.hex, fill: currentTheme.hex }} />
                 ))}
               </div>
               <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4 italic text-justify">
                 "Lavorare con Salvatore è stato un piacere. Il mio brano è diventato un altro livello! Suona potente e chiaro come non mai."
               </p>
-              <p className={`${getColorClass('text-600')} font-semibold text-sm sm:text-base`}>– Marco Rossi, Musicista</p>
+              <p className="font-semibold text-sm sm:text-base" style={{ color: currentTheme.hex }}>– Marco Rossi, Musicista</p>
             </div>
 
             <div className="scroll-reveal opacity-0 translate-y-12 transition-all duration-1000 ease-out delay-200 bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md">
               <div className="flex mb-3 sm:mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-4 h-4 sm:w-5 sm:h-5 ${getColorClass('text-600')} ${getColorClass('fill-600')}`} />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: currentTheme.hex, fill: currentTheme.hex }} />
                 ))}
               </div>
               <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4 italic text-justify">
                 "Ho fatto mix e mastering online con 440RecordingLab e il risultato è incredibile. La qualità è superiore a qualsiasi cosa avessi ottenuto da solo."
               </p>
-              <p className={`${getColorClass('text-600')} font-semibold text-sm sm:text-base`}>– Francesca Bellini, Produttrice</p>
+              <p className="font-semibold text-sm sm:text-base" style={{ color: currentTheme.hex }}>– Francesca Bellini, Produttrice</p>
             </div>
 
             <div className="scroll-reveal opacity-0 translate-y-12 transition-all duration-1000 ease-out delay-300 bg-neutral-800 p-6 sm:p-8 rounded-xl border border-neutral-700 shadow-md sm:col-span-2 lg:col-span-1">
               <div className="flex mb-3 sm:mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-4 h-4 sm:w-5 sm:h-5 ${getColorClass('text-600')} ${getColorClass('fill-600')}`} />
+                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: currentTheme.hex, fill: currentTheme.hex }} />
                 ))}
               </div>
               <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4 italic text-justify">
                 "La mia traccia è diventata radiofonica grazie al lavoro di Salvatore. Il suo orecchio è insuperabile."
               </p>
-              <p className={`${getColorClass('text-600')} font-semibold text-sm sm:text-base`}>– Davide Galli, Cantautore</p>
+              <p className="font-semibold text-sm sm:text-base" style={{ color: currentTheme.hex }}>– Davide Galli, Cantautore</p>
             </div>
           </div>
 
@@ -263,7 +257,10 @@ function App() {
             </p>
             <a
               href="#contatti"
-              className={`scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-500 inline-block ${getColorClass('bg-600')} ${getColorClass('hover:bg-700')} text-white px-6 py-3 sm:px-10 sm:py-4 rounded-full text-base sm:text-xl font-bold hover:scale-105`}
+              className="scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-500 inline-block text-white px-6 py-3 sm:px-10 sm:py-4 rounded-full text-base sm:text-xl font-bold hover:scale-105"
+              style={{ backgroundColor: currentTheme.hex }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = getHoverBgColorClass()}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = currentTheme.hex}
             >
               Prenota una sessione di mix e mastering e fai brillare la tua musica!
             </a>
@@ -274,7 +271,7 @@ function App() {
       <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="scroll-reveal opacity-0 scale-95 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold mb-4 sm:mb-6 px-2">
-            Porta la Tua Musica al <span className={getColorClass('text')}>Successo!</span>
+            <span className="text-white">Porta la Tua Musica al</span> <span style={{ color: currentTheme.hex }}>Successo!</span>
           </h2>
           <h3 className="scroll-reveal opacity-0 scale-95 transition-all duration-1000 ease-out delay-100 text-xl sm:text-2xl text-gray-300 mb-6 sm:mb-8 px-2">
             Prenota Ora il Tuo Mix & Mastering Professionale
@@ -290,7 +287,10 @@ function App() {
 
           <a
             href="#contatti"
-            className={`scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-500 inline-block ${getColorClass('bg-600')} ${getColorClass('hover:bg-700')} text-white px-8 py-4 sm:px-12 sm:py-5 rounded-full text-xl sm:text-2xl font-bold hover:scale-105 shadow-2xl`}
+            className="scroll-reveal opacity-0 scale-90 transition-all duration-1000 ease-out delay-500 inline-block text-white px-8 py-4 sm:px-12 sm:py-5 rounded-full text-xl sm:text-2xl font-bold hover:scale-105 shadow-2xl"
+            style={{ backgroundColor: currentTheme.hex }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = getHoverBgColorClass()}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = currentTheme.hex}
           >
             Prenota la Tua Sessione
           </a>
@@ -299,35 +299,35 @@ function App() {
 
       <section id="contatti" className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900">
         <div className="max-w-7xl mx-auto">
-          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-8 sm:mb-16 px-2 text-white">
-            <span className={getColorClass('text')}>Contattaci</span>
+          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-6 sm:mb-10 px-2">
+            <span className="text-white">Contattaci</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
             <div className="scroll-reveal opacity-0 -translate-x-12 transition-all duration-1000 ease-out delay-200">
               <div className="space-y-6 sm:space-y-8">
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <Phone className={`w-5 h-5 sm:w-6 sm:h-6 ${getColorClass('text-600')} mt-1 flex-shrink-0`} />
+                  <Phone className="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0" style={{ color: currentTheme.hex }} />
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-white">Telefono</h3>
-                    <a href="tel:3315266290" className={`text-gray-300 ${getColorClass('hover:text-600')} text-base sm:text-lg break-all`}>
+                    <a href="tel:3315266290" className="text-gray-300 hover:opacity-80 text-base sm:text-lg break-all" style={{ color: 'rgb(209, 213, 219)' }} onMouseEnter={(e) => e.currentTarget.style.color = currentTheme.hex} onMouseLeave={(e) => e.currentTarget.style.color = 'rgb(209, 213, 219)'}>
                       3315266290
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <Mail className={`w-5 h-5 sm:w-6 sm:h-6 ${getColorClass('text-600')} mt-1 flex-shrink-0`} />
+                  <Mail className="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0" style={{ color: currentTheme.hex }} />
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-white">Email</h3>
-                    <a href="mailto:info@440recordinglab.com" className={`text-gray-300 ${getColorClass('hover:text-600')} text-base sm:text-lg break-all`}>
+                    <a href="mailto:info@440recordinglab.com" className="text-gray-300 hover:opacity-80 text-base sm:text-lg break-all" style={{ color: 'rgb(209, 213, 219)' }} onMouseEnter={(e) => e.currentTarget.style.color = currentTheme.hex} onMouseLeave={(e) => e.currentTarget.style.color = 'rgb(209, 213, 219)'}>
                       info@440recordinglab.com
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3 sm:space-x-4">
-                  <Clock className={`w-5 h-5 sm:w-6 sm:h-6 ${getColorClass('text-600')} mt-1 flex-shrink-0`} />
+                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 mt-1 flex-shrink-0" style={{ color: currentTheme.hex }} />
                   <div>
                     <h3 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 text-white">Orari di Apertura</h3>
                     <div className="text-gray-300 space-y-1 text-sm sm:text-base">
@@ -349,7 +349,8 @@ function App() {
                     type="text"
                     id="name"
                     required
-                    className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 ${getColorClass('ring-600')} focus:border-transparent outline-none text-white text-sm sm:text-base`}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 focus:border-transparent outline-none text-white text-sm sm:text-base"
+                    style={{ '--tw-ring-color': currentTheme.hex } as React.CSSProperties}
                     placeholder="Il tuo nome"
                   />
                 </div>
@@ -362,7 +363,8 @@ function App() {
                     type="email"
                     id="email"
                     required
-                    className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 ${getColorClass('ring-600')} focus:border-transparent outline-none text-white text-sm sm:text-base`}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 focus:border-transparent outline-none text-white text-sm sm:text-base"
+                    style={{ '--tw-ring-color': currentTheme.hex } as React.CSSProperties}
                     placeholder="tua@email.com"
                   />
                 </div>
@@ -375,7 +377,8 @@ function App() {
                     type="tel"
                     id="phone"
                     required
-                    className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 ${getColorClass('ring-600')} focus:border-transparent outline-none text-white text-sm sm:text-base`}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 focus:border-transparent outline-none text-white text-sm sm:text-base"
+                    style={{ '--tw-ring-color': currentTheme.hex } as React.CSSProperties}
                     placeholder="Il tuo numero"
                   />
                 </div>
@@ -387,7 +390,8 @@ function App() {
                   <select
                     id="service"
                     required
-                    className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 ${getColorClass('ring-600')} focus:border-transparent outline-none text-white text-sm sm:text-base`}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 focus:border-transparent outline-none text-white text-sm sm:text-base"
+                    style={{ '--tw-ring-color': currentTheme.hex } as React.CSSProperties}
                   >
                     <option value="">Seleziona un servizio</option>
                     <option value="online">Mix & Mastering Online</option>
@@ -403,14 +407,18 @@ function App() {
                   <textarea
                     id="message"
                     rows={4}
-                    className={`w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 ${getColorClass('ring-600')} focus:border-transparent outline-none text-white text-sm sm:text-base`}
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 bg-gray-800 border border-neutral-700 rounded-lg focus:ring-2 focus:border-transparent outline-none text-white text-sm sm:text-base"
+                    style={{ '--tw-ring-color': currentTheme.hex } as React.CSSProperties}
                     placeholder="Raccontaci del tuo progetto..."
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className={`w-full ${getColorClass('bg-600')} ${getColorClass('hover:bg-700')} text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-base sm:text-lg font-bold transition-all transform hover:scale-105`}
+                  className="w-full text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-base sm:text-lg font-bold transition-all transform hover:scale-105"
+                  style={{ backgroundColor: currentTheme.hex }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = getHoverBgColorClass()}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = currentTheme.hex}
                 >
                   Invia Richiesta
                 </button>
@@ -422,8 +430,8 @@ function App() {
 
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-neutral-900">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 px-2 text-white">
-            Seguici sui <span className={getColorClass('text')}>Social</span>
+          <h2 className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out text-2xl sm:text-4xl font-bold mb-4 sm:mb-6 px-2">
+            <span className="text-white">Seguici sui</span> <span style={{ color: currentTheme.hex }}>Social</span>
           </h2>
           <p className="scroll-reveal opacity-0 translate-y-8 transition-all duration-1000 ease-out delay-100 text-base sm:text-lg text-gray-300 mb-8 sm:mb-12 px-2">
             Resta aggiornato sui nostri progetti e scopri i dietro le quinte del nostro lavoro
@@ -434,7 +442,10 @@ function App() {
               href="https://www.instagram.com/440_recordinglab?igsh=MWYxNHkycG5jMWNlcA%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
-              className={`scroll-reveal opacity-0 -translate-x-8 transition-all duration-1000 ease-out delay-200 group flex items-center space-x-3 bg-gradient-to-r ${currentTheme.gradient} hover:${currentTheme.gradientHover} text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 shadow-lg w-full sm:w-auto justify-center`}
+              className="scroll-reveal opacity-0 -translate-x-8 transition-all duration-1000 ease-out delay-200 group flex items-center space-x-3 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 shadow-lg w-full sm:w-auto justify-center"
+              style={{ backgroundColor: currentTheme.hex }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = getHoverBgColorClass()}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = currentTheme.hex}
             >
               <Instagram className="w-6 h-6 group-hover:rotate-12 transition-transform" />
               <span>Instagram</span>
